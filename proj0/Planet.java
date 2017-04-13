@@ -120,6 +120,25 @@ public class Planet {
         return netForceY;
     }
 
+    /** Updates the position and velocity of the planet 
+     *  @param  time    The time which the force is applied for.
+     *  @param  xxForce The force applied in the x direction.
+     *  @param  yyForce The force applied in the y direction.
+     */
+    public void update(double time, double xxForce, double yyForce) {
+        double accelerationX = xxForce / this.mass;
+        double accelerationY = yyForce / this.mass;
+
+        // v = u + at 
+        this.xxVel = this.xxVel + accelerationX * time;
+        this.yyVel = this.yyVel + accelerationY * time; 
+
+        // s = s0 + v*t; 
+        // close enough approximation
+        this.xxPos = this.xxPos + this.xxVel * time;
+        this.yyPos = this.yyPos + this.yyVel * time;       
+    }
+
 }
 
 
