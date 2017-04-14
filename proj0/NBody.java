@@ -14,6 +14,10 @@ public class NBody {
         // setting the scale 
         StdDraw.setScale(-radius, radius);
 
+        // setting the mood 
+        String spaceOdysseyPath = "./audio/2001.mid";
+        StdAudio.play(spaceOdysseyPath);
+
         // setting the background
         String backgroundImgPath = "./images/starfield.jpg";
         StdDraw.picture(0, 0, backgroundImgPath);
