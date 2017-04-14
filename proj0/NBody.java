@@ -1,5 +1,5 @@
 /** The class used to run the NBody simulation.
- *  @author  Arjun Nair 
+ *  @author Arjun Nair 
  */
 public class NBody {
 
@@ -61,14 +61,15 @@ public class NBody {
             currentTime += dt;
         }
 
+        // copied from the project guide
         StdOut.printf("%d\n", numPlanets);
         StdOut.printf("%.2e\n", radius);
 
-        for (int i = 0; i < planets.length; i++) {
+        for (int i = 0; i < numPlanets; i++) {
             StdOut.printf("%11.4e %11.4e %11.4e %11.4e %11.4e %12s\n",
-                          planets[i].xxPos, planets[i].yyPos, 
-                          planets[i].xxVel, planets[i].yyVel, 
-                          planets[i].mass, planets[i].imgFileName);   
+                          planetArray[i].xxPos, planetArray[i].yyPos, 
+                          planetArray[i].xxVel, planetArray[i].yyVel, 
+                          planetArray[i].mass,  planetArray[i].imgFileName);   
         }
     }
 
