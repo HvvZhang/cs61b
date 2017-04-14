@@ -71,6 +71,8 @@ public class NBody {
                           planetArray[i].xxVel, planetArray[i].yyVel, 
                           planetArray[i].mass,  planetArray[i].imgFileName);   
         }
+
+        StdAudio.close();
     }
 
     /** Returns the radius of the universe 
