@@ -1,6 +1,6 @@
 /** The Planet class used to represent all the different 
  *  bodies in space. 
- *  @author  Arjun Nair 
+ *  @author Arjun Nair 
  */
 public class Planet {
     public double xxPos;
@@ -11,12 +11,12 @@ public class Planet {
     public String imgFileName; 
 
     /** Constructor to create planet from scratch. 
-     *  @param  xxPos          x co-ordinate of the planet.
-     *  @param  yyPos          y co-ordinate of the planet.
-     *  @param  xxVel          x component of the planet's velocity.
-     *  @param  yyVel          y component of the planet's velocity.
-     *  @param  mass           The planet's mass.
-     *  @param  imgFileName    The file name to the image used for the planet.   
+     *  @param  xxPos       x co-ordinate of the planet.
+     *  @param  yyPos       y co-ordinate of the planet.
+     *  @param  xxVel       x component of the planet's velocity.
+     *  @param  yyVel       y component of the planet's velocity.
+     *  @param  mass        The planet's mass.
+     *  @param  imgFileName The file name to the image used for the planet.   
      */ 
     public Planet(double xxPos, double yyPos, double xxVel,
                   double yyVel, double mass, String imgFileName) {
@@ -29,7 +29,7 @@ public class Planet {
     }
 
     /** Constructor to create a copy of a planet. 
-     *  @param  p    The planet to be copied.
+     *  @param p The planet to be copied.
      */
     public Planet(Planet p) {
         this.xxPos = p.xxPos;
@@ -41,7 +41,7 @@ public class Planet {
     }
 
     /** Calculates the distance between two planets 
-     *  @param  p    The planet used to calculate distance.
+     *  @param p The planet used to calculate distance.
      */
     public double calcDistance(Planet p) {
         double dx = p.xxPos - this.xxPos;
@@ -51,7 +51,7 @@ public class Planet {
     }
 
     /** Calculates the force exerted by the planet p.
-     *  @param  p    The planet to be used in the force calculations.    
+     *  @param p The planet to be used in the force calculations.    
      */
     public double calcForceExertedBy(Planet p) {
         double G = 6.67e-11; // The universal gravitational constant
@@ -63,7 +63,7 @@ public class Planet {
 
     /** Calculates the force exerted by the planet p
      *  in the x direction.
-     *  @param p    The planet used to calculate distance.
+     *  @param p The planet used to calculate distance.
      */
     public double calcForceExertedByX(Planet p) {
         double forceExerted = this.calcForceExertedBy(p);
@@ -77,7 +77,7 @@ public class Planet {
 
     /** Calculates the force exerted by the planet p
      *  in the y direction.
-     *  @param p    The planet used to calculate distance.
+     *  @param p The planet used to calculate distance.
      */
     public double calcForceExertedByY(Planet p) {
         double forceExerted = this.calcForceExertedBy(p);
@@ -91,7 +91,7 @@ public class Planet {
 
     /** Calculates the net force exerted on a planet by all 
      *  the other planets.
-     *  @param  planetArray    A list of planets.
+     *  @param planetArray A list of planets.
      */
     public double calcNetForceExertedByX(Planet[] planetArray) {
         double netForceX = 0;
@@ -106,7 +106,7 @@ public class Planet {
 
     /** Calculates the net force exerted on a planet by all 
      *  the other planets.
-     *  @param  planetArray    A list of planets.
+     *  @param planetArray A list of planets.
      */
     public double calcNetForceExertedByY(Planet[] planetArray) {
         double netForceY = 0;
@@ -120,9 +120,9 @@ public class Planet {
     }
 
     /** Updates the position and velocity of the planet 
-     *  @param  time    The time which the force is applied for.
-     *  @param  xxForce The force applied in the x direction.
-     *  @param  yyForce The force applied in the y direction.
+     *  @param time    The time which the force is applied for.
+     *  @param xxForce The force applied in the x direction.
+     *  @param yyForce The force applied in the y direction.
      */
     public void update(double time, double xxForce, double yyForce) {
         double accelerationX = xxForce / this.mass;
