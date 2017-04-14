@@ -1,6 +1,6 @@
 /** The Planet class used to represent all the different 
  *  bodies in space. 
- *  programmer  Arjun Nair 
+ *  @author  Arjun Nair 
  */
 public class Planet {
     public double xxPos;
@@ -9,8 +9,6 @@ public class Planet {
     public double yyVel;
     public double mass;
     public String imgFileName; 
-
-    public static double G = 6.67e-11; // The universal gravitational constant
 
     /** Constructor to create planet from scratch. 
      *  @param  xxPos          x co-ordinate of the planet.
@@ -56,6 +54,7 @@ public class Planet {
      *  @param  p    The planet to be used in the force calculations.    
      */
     public double calcForceExertedBy(Planet p) {
+        double G = 6.67e-11; // The universal gravitational constant
         double r = this.calcDistance(p);
         double forceExerted = (G * this.mass * p.mass) / (r * r);
         
@@ -139,6 +138,9 @@ public class Planet {
         this.yyPos = this.yyPos + this.yyVel * time;       
     }
 
+    public void draw() {
+        StdDraw.picture(this.xxPos, this.yyPos, "./images/" + this.imgFileName);
+    }
 }
 
 
