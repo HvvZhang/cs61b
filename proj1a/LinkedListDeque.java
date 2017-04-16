@@ -50,8 +50,8 @@ public class LinkedListDeque<T> {
 
     /**
      * Returns the i-th item in the list.
-     *  Written iteratively.
-     *  @param index The position of the item in the list.
+     * Written iteratively.
+     * @param index The position of the item in the list.
      */
     public T get(int index) {
         ItemNode p = this.sentinel;
@@ -67,6 +67,15 @@ public class LinkedListDeque<T> {
         return p.item;
     }
 
+    /**
+     * Adds an item to the front of the list.
+     * @param item The item to be added.
+     */
+    public void addFirst(T item) {
+        this.sentinel.next = new ItemNode(item, this.sentinel, this.sentinel.next);
+        this.size += 1;
+    }
+
     /** Writing some temporary tests here. */
     public static void main(String[] args) {
         /* Constructor tests*/
@@ -76,8 +85,8 @@ public class LinkedListDeque<T> {
 
         /* Testing the initial sizes of the lists. */
         System.out.println("size tests");
-        System.out.println(L.size); // expected 0
-        System.out.println(M.size); // expected 1
+        System.out.println(L.size()); // expected 0
+        System.out.println(M.size()); // expected 1
 
         /* Testing the get method. */
         System.out.println("get tests");
@@ -85,5 +94,12 @@ public class LinkedListDeque<T> {
         System.out.println(M.get(0)); // expected 3
         System.out.println(M.get(-1)); // expected null
         System.out.println(S.get(0)); // expected ho-ho-ho
+
+        /* Testing the addFirst method */
+        L.addFirst(2);
+        M.addFirst(5);
+        S.addFirst("booga");
+        System.out.println(M.sentinel.prev.item == 3); // expected true
+        System.out.println(L.sentinel.prev.item == 2); // expected true
     }
 }
