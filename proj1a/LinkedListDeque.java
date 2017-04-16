@@ -91,12 +91,8 @@ public class LinkedListDeque<T> {
      */
     public void addFirst(T item) {
         ItemNode firstNode = new ItemNode(item, this.sentinel, this.sentinel.next);
+        this.sentinel.next.prev = firstNode;
         this.sentinel.next = firstNode;
-
-        /* Have to change previous if this is the first item being added. */
-        if (this.size == 0) {
-            this.sentinel.prev = firstNode;
-        }
         this.size += 1;
     }
 
@@ -105,43 +101,42 @@ public class LinkedListDeque<T> {
      * @param item The item to be added.
      */
     public void addLast(T item) {
-        /* Different behaviour if list is empty. */
-        if (this.size == 0) {
-            this.addFirst(item);
-        } else {
-            ItemNode prevLastNode = this.sentinel.prev;
-            ItemNode newLastNode = new ItemNode(item, prevLastNode, this.sentinel);
-            prevLastNode.next = newLastNode;
-            this.sentinel.prev = newLastNode;
-            this.size += 1;
-        }
+        ItemNode prevLastNode = this.sentinel.prev;
+        ItemNode newLastNode = new ItemNode(item, prevLastNode, this.sentinel);
+        prevLastNode.next = newLastNode;
+        this.sentinel.prev = newLastNode;
+        this.size += 1;
     }
 
     /**
      * Removes and returns the first item from the list.
      */
     public T removeFirst() {
-        if (this.size == 0) {
-            return null;
-        } else if (this.size == 1) {
-            ItemNode oldFirstNode = this.sentinel.next;
-            this.sentinel.next = this.sentinel;
-            this.sentinel.prev = this.sentinel;
+        ItemNode oldFirstNode = this.sentinel.next;
+        ItemNode newFirstNode = oldFirstNode.next;
+        newFirstNode.prev = this.sentinel;
+        this.sentinel.next = newFirstNode;
+
+        if (this.size > 0) {
             this.size -= 1;
-            return oldFirstNode.item;
-        } else {
-            ItemNode oldFirstNode = this.sentinel.next;
-            ItemNode newFirstNode = oldFirstNode.next;
-            newFirstNode.prev = this.sentinel;
-            this.sentinel.next = newFirstNode;
-            this.size -= 1;
-            return oldFirstNode.item;
         }
+        return oldFirstNode.item;
     }
 
     /**
      * Removes and returns the last item from the list.
      */
+    public T removeLast() {
+        ItemNode oldLastNode = this.sentinel.prev;
+        ItemNode newLastNode = oldLastNode.prev;
+        newLastNode.next = this.sentinel;
+        this.sentinel.prev = newLastNode;
+
+        if (this.size > 0) {
+            this.size -= 1;
+        }
+        return oldLastNode.item;
+    }
 
     /** Writing some temporary tests here. */
     private static void test() {
@@ -165,10 +160,12 @@ public class LinkedListDeque<T> {
         /* Testing the addFirst method. */
         System.out.println("addFirst tests");
         L.addFirst(2);
+
         M.addFirst(5);
         S.addFirst("booga");
         System.out.println(M.sentinel.prev.item == 3); // expected true
         System.out.println(L.sentinel.prev.item == 2); // expected true
+
 
         /* Testing the isEmpty method. */
         System.out.println("isEmpty tests");
@@ -216,7 +213,7 @@ public class LinkedListDeque<T> {
         System.out.println(I.removeFirst() == null); // expected true
         System.out.println(I.size() == 0); // expected true
         I.addLast(1);
-        I.printDeque(); // expected one
+        I.printDeque(); // expected 1
         System.out.println(I.size() == 1); // expected true
         System.out.println(I.removeFirst() == 1); // expected true
         System.out.println(I.size() == 0); // expected true
@@ -233,6 +230,20 @@ public class LinkedListDeque<T> {
         System.out.println(I.sentinel.next.item == 2); // expected true
         System.out.println(I.sentinel.next.prev == I.sentinel); // expected true
         System.out.println(I.sentinel.next.next.item == 3); // expected true
+        System.out.println(I.size() == 2); // expected true
+        I.removeFirst();
+        System.out.println(I.size() == 1); // expected true
+
+        /* Testing the removeLast method. */
+        System.out.println("removeLast tests");
+        LinkedListDeque<Integer> H = new LinkedListDeque<>();
+        System.out.println(H.removeLast() == null); // expected true
+        H.addLast(2);
+        H.addFirst(1);
+        H.printDeque(); // expected 1 2
+        System.out.println(H.removeLast() == 2); // expected true
+        H.printDeque(); // expected 1
+        System.out.println(H.sentinel.prev.item == 1); // expected true
     }
 
     public static void main(String[] args) {
