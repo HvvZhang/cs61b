@@ -1,3 +1,5 @@
+import sun.awt.image.ImageWatched;
+
 /**
  * Represents a doubly linked linked list.
  * @author Arjun Nair
@@ -130,6 +132,13 @@ public class LinkedListDeque<T> {
         S.addFirst("booga");
         System.out.println(M.sentinel.prev.item == 3); // expected true
         System.out.println(L.sentinel.prev.item == 2); // expected true
+
+        /* Test the isEmpty method */
+        System.out.println("isEmpty tests");
+        LinkedListDeque<String> P = new LinkedListDeque<>();
+        System.out.println(P.isEmpty()); // expected true
+        P.addLast("booga");
+        System.out.println(P.isEmpty() == false); // expected true
 
         /* Testing the addLast method */
         System.out.println("addLast tests");
