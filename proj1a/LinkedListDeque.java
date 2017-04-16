@@ -1,5 +1,3 @@
-import sun.awt.image.ImageWatched;
-
 /**
  * Represents a doubly linked linked list.
  * @author Arjun Nair
@@ -41,7 +39,9 @@ public class LinkedListDeque<T> {
 
     /** Constructor to instantiate empty lists. */
     public LinkedListDeque() {
-        this.sentinel = new ItemNode(this.sentinel, this.sentinel);
+        this.sentinel = new ItemNode(null, null);
+        this.sentinel.prev = this.sentinel;
+        this.sentinel.next = this.sentinel;
         this.size = 0;
     }
 
@@ -52,7 +52,7 @@ public class LinkedListDeque<T> {
 
     /** Returns true if the list is empty. */
     public boolean isEmpty() {
-        return this.size == 0;
+        return this.sentinel.next == this.sentinel;
     }
 
     /**
@@ -72,6 +72,17 @@ public class LinkedListDeque<T> {
             index -= 1;
         }
         return p.item;
+    }
+
+    /** Prints out the items in the list separated by spaces. */
+    public void printDeque() {
+        ItemNode p = this.sentinel;
+
+        while (p.next != this.sentinel) {
+            System.out.print(p.next.item + " ");
+            p = p.next;
+        }
+        System.out.println();
     }
 
     /**
@@ -106,9 +117,35 @@ public class LinkedListDeque<T> {
         }
     }
 
+    /**
+     * Removes and returns the first item from the list.
+     */
+    public T removeFirst() {
+        if (this.size == 0) {
+            return null;
+        } else if (this.size == 1) {
+            ItemNode oldFirstNode = this.sentinel.next;
+            this.sentinel.next = this.sentinel;
+            this.sentinel.prev = this.sentinel;
+            this.size -= 1;
+            return oldFirstNode.item;
+        } else {
+            ItemNode oldFirstNode = this.sentinel.next;
+            ItemNode newFirstNode = oldFirstNode.next;
+            newFirstNode.prev = this.sentinel;
+            this.sentinel.next = newFirstNode;
+            this.size -= 1;
+            return oldFirstNode.item;
+        }
+    }
+
+    /**
+     * Removes and returns the last item from the list.
+     */
+
     /** Writing some temporary tests here. */
     private static void test() {
-        /* Constructor tests*/
+        /* Constructor tests */
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         LinkedListDeque<Integer> M = new LinkedListDeque<>(3);
         LinkedListDeque<String> S = new LinkedListDeque<>("ho-ho-ho");
@@ -125,7 +162,7 @@ public class LinkedListDeque<T> {
         System.out.println(M.get(-1) == null); // expected true
         System.out.println(S.get(0) == "ho-ho-ho"); // expected true
 
-        /* Testing the addFirst method */
+        /* Testing the addFirst method. */
         System.out.println("addFirst tests");
         L.addFirst(2);
         M.addFirst(5);
@@ -133,14 +170,14 @@ public class LinkedListDeque<T> {
         System.out.println(M.sentinel.prev.item == 3); // expected true
         System.out.println(L.sentinel.prev.item == 2); // expected true
 
-        /* Test the isEmpty method */
+        /* Testing the isEmpty method. */
         System.out.println("isEmpty tests");
         LinkedListDeque<String> P = new LinkedListDeque<>();
         System.out.println(P.isEmpty()); // expected true
         P.addLast("booga");
-        System.out.println(P.isEmpty() == false); // expected true
+        System.out.println(!P.isEmpty()); // expected true
 
-        /* Testing the addLast method */
+        /* Testing the addLast method. */
         System.out.println("addLast tests");
         LinkedListDeque<Integer> K = new LinkedListDeque<>();
         LinkedListDeque<Integer> N = new LinkedListDeque<>(3);
@@ -158,6 +195,44 @@ public class LinkedListDeque<T> {
         System.out.println(N.sentinel.next.item == 3); // expected true
         System.out.println(N.sentinel.next.next.item == 4); // expected true
         System.out.println(N.sentinel.next.next.prev.item == 3); // expected true
+
+        /* Testing the printDeque method. */
+        System.out.println("printDeque tests");
+        LinkedListDeque<Integer> T = new LinkedListDeque<>();
+        T.printDeque(); // should print out nothing
+        T.addLast(3);
+        T.printDeque(); // should print out 3
+        T.addFirst(2);
+        T.printDeque(); // should print out 2 3
+        T.addLast(5);
+        T.printDeque(); // should print out 2 3 5
+
+        LinkedListDeque<Integer> O = new LinkedListDeque<>(3);
+        O.printDeque(); // expected 3
+
+        /* Testing the removeFirst method. */
+        System.out.println("removeFirst tests");
+        LinkedListDeque<Integer> I = new LinkedListDeque<>();
+        System.out.println(I.removeFirst() == null); // expected true
+        System.out.println(I.size() == 0); // expected true
+        I.addLast(1);
+        I.printDeque(); // expected one
+        System.out.println(I.size() == 1); // expected true
+        System.out.println(I.removeFirst() == 1); // expected true
+        System.out.println(I.size() == 0); // expected true
+        I.printDeque(); // expected empty line
+        System.out.println(I.sentinel.next == I.sentinel); // expected true
+        System.out.println(I.sentinel.prev == I.sentinel); // expected true
+        I.addFirst(2);
+        I.addLast(3);
+        I.addFirst(1);
+        I.printDeque(); // expected 1 2 3
+        System.out.println(I.removeFirst() == 1);
+        I.printDeque(); // expected 2 3
+        System.out.println(I.sentinel.prev.item == 3); // expected true
+        System.out.println(I.sentinel.next.item == 2); // expected true
+        System.out.println(I.sentinel.next.prev == I.sentinel); // expected true
+        System.out.println(I.sentinel.next.next.item == 3); // expected true
     }
 
     public static void main(String[] args) {
