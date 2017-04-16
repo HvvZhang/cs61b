@@ -102,11 +102,10 @@ public class LinkedListDeque<T> {
             this.sentinel.prev = newLastNode;
             this.size += 1;
         }
-
     }
 
     /** Writing some temporary tests here. */
-    public static void main(String[] args) {
+    private static void test() {
         /* Constructor tests*/
         LinkedListDeque<Integer> L = new LinkedListDeque<>();
         LinkedListDeque<Integer> M = new LinkedListDeque<>(3);
@@ -143,6 +142,16 @@ public class LinkedListDeque<T> {
         K.addLast(3);
         System.out.println(K.get(1) == 3); // expected true
         System.out.println(K.size() == 2); // expected true
+        System.out.println(N.size() == 1); // expected true
+        N.addLast(4);
+        System.out.println(N.get(1) == 4); // expected true
+        System.out.println(N.sentinel.prev.item == 4); // expected true
+        System.out.println(N.sentinel.next.item == 3); // expected true
+        System.out.println(N.sentinel.next.next.item == 4); // expected true
+        System.out.println(N.sentinel.next.next.prev.item == 3); // expected true
+    }
 
+    public static void main(String[] args) {
+        test();
     }
 }
