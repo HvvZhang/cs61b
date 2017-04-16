@@ -72,8 +72,14 @@ public class LinkedListDeque<T> {
      * @param item The item to be added.
      */
     public void addFirst(T item) {
-        this.sentinel.next = new ItemNode(item, this.sentinel, this.sentinel.next);
+        ItemNode firstNode = new ItemNode(item, this.sentinel, this.sentinel.next);
+        this.sentinel.next = firstNode;
         this.size += 1;
+
+        /* Have to change previous if this is the first item being added. */
+        if (this.size == 1) {
+            this.sentinel.prev = firstNode;
+        }
     }
 
     /** Writing some temporary tests here. */
