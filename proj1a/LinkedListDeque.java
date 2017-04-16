@@ -271,7 +271,7 @@ public class LinkedListDeque<T> {
         System.out.println(H.sentinel.prev.item == 1); // expected true
 
         /* Testing the getRecursive method. */
-        System.out.println("getRecursive tests")
+        System.out.println("getRecursive tests");
         L = new LinkedListDeque<>();
         M = new LinkedListDeque<>(3);
         S = new LinkedListDeque<>("ho-ho-ho");
