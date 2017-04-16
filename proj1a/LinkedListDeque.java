@@ -48,6 +48,11 @@ public class LinkedListDeque<T> {
         return this.size;
     }
 
+    /** Returns true if the list is empty. */
+    public boolean isEmpty() {
+        return this.size == 0;
+    }
+
     /**
      * Returns the i-th item in the list.
      * Written iteratively.
@@ -74,12 +79,30 @@ public class LinkedListDeque<T> {
     public void addFirst(T item) {
         ItemNode firstNode = new ItemNode(item, this.sentinel, this.sentinel.next);
         this.sentinel.next = firstNode;
-        this.size += 1;
 
         /* Have to change previous if this is the first item being added. */
-        if (this.size == 1) {
+        if (this.size == 0) {
             this.sentinel.prev = firstNode;
         }
+        this.size += 1;
+    }
+
+    /**
+     * Adds an item to the end of the list.
+     * @param item The item to be added.
+     */
+    public void addLast(T item) {
+        /* Different behaviour if list is empty. */
+        if (this.size == 0) {
+            this.addFirst(item);
+        } else {
+            ItemNode prevLastNode = this.sentinel.prev;
+            ItemNode newLastNode = new ItemNode(item, prevLastNode, this.sentinel);
+            prevLastNode.next = newLastNode;
+            this.sentinel.prev = newLastNode;
+            this.size += 1;
+        }
+
     }
 
     /** Writing some temporary tests here. */
@@ -91,21 +114,35 @@ public class LinkedListDeque<T> {
 
         /* Testing the initial sizes of the lists. */
         System.out.println("size tests");
-        System.out.println(L.size()); // expected 0
-        System.out.println(M.size()); // expected 1
+        System.out.println(L.size() == 0); // expected true
+        System.out.println(M.size() == 1); // expected true
 
         /* Testing the get method. */
         System.out.println("get tests");
-        System.out.println(L.get(0)); // expected null
-        System.out.println(M.get(0)); // expected 3
-        System.out.println(M.get(-1)); // expected null
-        System.out.println(S.get(0)); // expected ho-ho-ho
+        System.out.println(L.get(0) == null); // expected true
+        System.out.println(M.get(0) == 3); // expected true
+        System.out.println(M.get(-1) == null); // expected true
+        System.out.println(S.get(0) == "ho-ho-ho"); // expected true
 
         /* Testing the addFirst method */
+        System.out.println("addFirst tests");
         L.addFirst(2);
         M.addFirst(5);
         S.addFirst("booga");
         System.out.println(M.sentinel.prev.item == 3); // expected true
         System.out.println(L.sentinel.prev.item == 2); // expected true
+
+        /* Testing the addLast method */
+        System.out.println("addLast tests");
+        LinkedListDeque<Integer> K = new LinkedListDeque<>();
+        LinkedListDeque<Integer> N = new LinkedListDeque<>(3);
+        K.addLast(2);
+        System.out.println(K.sentinel.prev.item == 2); // expected true
+        System.out.println(K.sentinel.next.item == 2); // expected true
+        System.out.println(K.size() == 1); // expected true
+        K.addLast(3);
+        System.out.println(K.get(1) == 3); // expected true
+        System.out.println(K.size() == 2); // expected true
+
     }
 }
