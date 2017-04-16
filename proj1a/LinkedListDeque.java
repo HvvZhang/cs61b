@@ -74,6 +74,31 @@ public class LinkedListDeque<T> {
         return p.item;
     }
 
+    /**
+     * Returns the i-th item in the list.
+     * Written recursively.
+     * @param index The position of the item in the list.
+     */
+    private T getRecursive(ItemNode p, int index) {
+        if (index == 0) {
+            return p.next.item;
+        } else {
+            return getRecursive(p.next, index - 1);
+        }
+    }
+
+    /**
+     * Returns the i-th item in the list.
+     * @param index The position of the item in the list.
+     */
+    public T getRecursive(int index) {
+        if (index >= this.size || index < 0) {
+            return null;
+        } else {
+            return getRecursive(this.sentinel, index);
+        }
+    }
+
     /** Prints out the items in the list separated by spaces. */
     public void printDeque() {
         ItemNode p = this.sentinel;
@@ -244,6 +269,17 @@ public class LinkedListDeque<T> {
         System.out.println(H.removeLast() == 2); // expected true
         H.printDeque(); // expected 1
         System.out.println(H.sentinel.prev.item == 1); // expected true
+
+        /* Testing the getRecursive method. */
+        System.out.println("getRecursive tests")
+        L = new LinkedListDeque<>();
+        M = new LinkedListDeque<>(3);
+        S = new LinkedListDeque<>("ho-ho-ho");
+        System.out.println("get tests");
+        System.out.println(L.getRecursive(0) == null); // expected true
+        System.out.println(M.getRecursive(0) == 3); // expected true
+        System.out.println(M.getRecursive(-1) == null); // expected true
+        System.out.println(S.getRecursive(0) == "ho-ho-ho"); // expected true
     }
 
     public static void main(String[] args) {
