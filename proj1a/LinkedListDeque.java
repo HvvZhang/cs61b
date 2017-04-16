@@ -5,7 +5,7 @@
 public class LinkedListDeque<T> {
 
     /**
-     * Represents a recursive ItemList.
+     * Represents a naked DLList.
      */
     private class ItemNode {
         ItemNode prev;
@@ -15,12 +15,6 @@ public class LinkedListDeque<T> {
         public ItemNode(T item, ItemNode prev, ItemNode next) {
             this.prev = prev;
             this.item = item;
-            this.next = next;
-        }
-
-        /* We'll let item have whatever default value here. */
-        public ItemNode(ItemNode prev, ItemNode next) {
-            this.prev = prev;
             this.next = next;
         }
     }
@@ -39,7 +33,7 @@ public class LinkedListDeque<T> {
 
     /** Constructor to instantiate empty lists. */
     public LinkedListDeque() {
-        this.sentinel = new ItemNode(null, null);
+        this.sentinel = new ItemNode(null, null, null);
         this.sentinel.prev = this.sentinel;
         this.sentinel.next = this.sentinel;
         this.size = 0;
@@ -126,9 +120,9 @@ public class LinkedListDeque<T> {
      * @param item The item to be added.
      */
     public void addLast(T item) {
-        ItemNode prevLastNode = this.sentinel.prev;
-        ItemNode newLastNode = new ItemNode(item, prevLastNode, this.sentinel);
-        prevLastNode.next = newLastNode;
+        ItemNode oldLastNode = this.sentinel.prev;
+        ItemNode newLastNode = new ItemNode(item, oldLastNode, this.sentinel);
+        oldLastNode.next = newLastNode;
         this.sentinel.prev = newLastNode;
         this.size += 1;
     }
@@ -275,7 +269,6 @@ public class LinkedListDeque<T> {
         L = new LinkedListDeque<>();
         M = new LinkedListDeque<>(3);
         S = new LinkedListDeque<>("ho-ho-ho");
-        System.out.println("get tests");
         System.out.println(L.getRecursive(0) == null); // expected true
         System.out.println(M.getRecursive(0) == 3); // expected true
         System.out.println(M.getRecursive(-1) == null); // expected true
