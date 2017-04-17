@@ -142,7 +142,6 @@ public class LinkedListDeque<T> {
             return size - 1;
         }
         return size;
-
     }
 
     /**
