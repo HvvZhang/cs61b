@@ -2,6 +2,15 @@
  * Represents a doubly linked linked list.
  * @author Arjun Nair
  */
+
+/* Invariants
+1. Each ItemNode must always have a prev and a next node.
+   i.e the prev and next nodes must never be null.
+2. size should always represent the number of items in the list.
+3. The empty and non-empty lists both should have the
+   same underlying structure. An empty list must not be null.
+*/
+
 public class LinkedListDeque<T> {
 
     /**
@@ -127,6 +136,15 @@ public class LinkedListDeque<T> {
         this.size += 1;
     }
 
+    /** Returns the new size after an item has been removed. */
+    private static int minusOne(int size) {
+        if (size > 0) {
+            return size - 1;
+        }
+        return size;
+
+    }
+
     /**
      * Removes and returns the first item from the list.
      */
@@ -136,9 +154,7 @@ public class LinkedListDeque<T> {
         newFirstNode.prev = this.sentinel;
         this.sentinel.next = newFirstNode;
 
-        if (this.size > 0) {
-            this.size -= 1;
-        }
+        this.size = minusOne(this.size);
         return oldFirstNode.item;
     }
 
@@ -151,9 +167,7 @@ public class LinkedListDeque<T> {
         newLastNode.next = this.sentinel;
         this.sentinel.prev = newLastNode;
 
-        if (this.size > 0) {
-            this.size -= 1;
-        }
+        this.size = minusOne(this.size);
         return oldLastNode.item;
     }
 
