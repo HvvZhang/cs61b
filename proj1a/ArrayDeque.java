@@ -24,9 +24,9 @@
    in the list.
 */
 
-public class ArrayDeque<T> {
+public class ArrayDeque<Item> {
 
-    private T[] items;
+    private Item[] items;
     private int size;
     private int nextFirst;
     private int nextLast;
@@ -35,7 +35,7 @@ public class ArrayDeque<T> {
 
     /** Constructor to create an empty AList. */
     public ArrayDeque() {
-        this.items = (T[]) new Object[8];
+        this.items = (Item[]) new Object[8];
         this.size = 0;
         this.nextFirst = 0;
         this.nextLast = 1;
@@ -55,7 +55,7 @@ public class ArrayDeque<T> {
      * Returns the item at the specified index.
      * @param index The index of the i-th item.
      */
-    public T get(int index) {
+    public Item get(int index) {
         if (index >= this.size || index < 0) {
             return null;
         }
@@ -109,7 +109,7 @@ public class ArrayDeque<T> {
      * @param capacity The new size of the items array.
      */
     private void increaseSize(int capacity) {
-        T[] newItems = (T[]) new Object[capacity];
+        Item[] newItems = (Item[]) new Object[capacity];
 
         for (int i = 0; i < this.size; i++) {
             newItems[i] = this.get(i);
@@ -124,7 +124,7 @@ public class ArrayDeque<T> {
      * Adds an item to the front of the list.
      * @param item Item to be added to the list.
      */
-    public void addFirst(T item) {
+    public void addFirst(Item item) {
         if (this.size == this.items.length) {
             this.increaseSize(this.size * 2);
         }
@@ -138,7 +138,7 @@ public class ArrayDeque<T> {
      * Adds an item to the end of the list.
      * @param item Item to be added to the list.
      */
-    public void addLast(T item) {
+    public void addLast(Item item) {
         if (this.size == this.items.length) {
             this.increaseSize(this.size * 2);
         }
@@ -153,7 +153,7 @@ public class ArrayDeque<T> {
      * @param capacity The new size of the items array.
      */
     private void decreaseSize(int capacity) {
-        T[] newItems = (T[]) new Object[capacity];
+        Item[] newItems = (Item[]) new Object[capacity];
 
         for (int i = 0; i < this.size; i++) {
             newItems[i] = this.get(i);
@@ -176,7 +176,7 @@ public class ArrayDeque<T> {
     /**
      * Removes and returns the first item from the list.
      */
-    public T removeFirst() {
+    public Item removeFirst() {
         /* Reducing size first for usageRatio calculations. */
         if (this.size == 0) {
             return null;
@@ -186,7 +186,7 @@ public class ArrayDeque<T> {
         this.fixUsageRatio();
 
         int firstIndex = plusOne(this.nextFirst);
-        T firstItem = this.items[firstIndex];
+        Item firstItem = this.items[firstIndex];
         this.items[firstIndex] = null;
         this.nextFirst = firstIndex;
 
@@ -196,7 +196,7 @@ public class ArrayDeque<T> {
     /**
      * Removes and returns the last item from the list.
      */
-    public T removeLast() {
+    public Item removeLast() {
         if (this.size == 0) {
             return null;
         }
@@ -205,7 +205,7 @@ public class ArrayDeque<T> {
         this.fixUsageRatio();
 
         int lastIndex = minusOne(this.nextLast);
-        T lastItem = this.items[lastIndex];
+        Item lastItem = this.items[lastIndex];
         this.items[lastIndex] = null;
         this.nextLast = lastIndex;
 
