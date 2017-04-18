@@ -63,15 +63,9 @@ public class ArrayDeque<Item> {
         }
 
         int firstIndex = plusOne(nextFirst);
-        int requiredIndex = firstIndex + index;
+        int requiredIndex = (firstIndex + index) % this.items.length;
 
-        if (requiredIndex < this.items.length) {
-            return this.items[requiredIndex];
-        } else {
-            int numEarlierItems = this.items.length - firstIndex;
-            requiredIndex = index - numEarlierItems;
-            return this.items[requiredIndex];
-        }
+        return this.items[requiredIndex];
     }
 
     /** Prints out the items in the list. */
