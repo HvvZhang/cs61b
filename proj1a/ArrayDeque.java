@@ -132,13 +132,8 @@ public class ArrayDeque<T> {
 
     /** Prints out the items in the list. */
     public void printDeque() {
-        int firstIndex = this.plusOne(this.nextFirst);
-        int counter = 0;
-
-        while (counter < this.size) {
-            System.out.print(this.items[firstIndex] + " ");
-            firstIndex = this.plusOne(firstIndex);
-            counter += 1;
+        for (int i = 0; i < this.size; i++) {
+            System.out.print(this.get(i) + " ");
         }
         System.out.println();
     }
