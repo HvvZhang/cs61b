@@ -12,8 +12,14 @@
    of the first item.
 4. minusOne(nextLast) will always be the position
    of the last item.
-5. plusOne(nextLast) will be the new position of nextLast.
-6. minusOne(nextFirst) will be the new position of nextFirst.
+5. plusOne(nextLast) will be the new position of nextLast
+   when an item is added to the list.
+6. minusOne(nextFirst) will be the new position of nextFirst
+   when an item is added to the list.
+7. plusOne(nextFirst) will be the new position of nextFirst
+   one an item is removed from the list.
+8. minusOne(nextLast) will be the new position of nextLast
+   when an item is removed from the list.
 7. size should always represent the number of items
    in the list.
 */
@@ -24,6 +30,9 @@ public class ArrayDeque<T> {
     private int size;
     private int nextFirst;
     private int nextLast;
+
+    private static double usageFactor = 0.25;
+    private static int increaseFactor = 2;
 
     /** Constructor to create an empty AList. */
     public ArrayDeque() {
@@ -82,7 +91,7 @@ public class ArrayDeque<T> {
      */
     private void increaseSize(int capacity) {
         T[] newItems = (T[]) new Object[capacity];
-        int firstIndex = this.plusOne(this.nextFirst);
+        int firstIndex = plusOne(this.nextFirst);
         int numFirstCopy = this.size - firstIndex;
         int numSecondCopy = this.size - numFirstCopy;
 
@@ -91,7 +100,7 @@ public class ArrayDeque<T> {
         System.arraycopy(this.items, 0, newItems, numFirstCopy, numSecondCopy);
 
         this.items = newItems;
-        this.nextFirst = this.minusOne(0);
+        this.nextFirst = minusOne(0);
         this.nextLast = this.size;
     }
 
@@ -105,9 +114,30 @@ public class ArrayDeque<T> {
         }
 
         this.items[this.nextFirst] = item;
-        this.nextFirst  = minusOne(this.nextFirst);
+        this.nextFirst = minusOne(this.nextFirst);
         this.size += 1;
     }
+
+    /**
+     * Adds an item to the end of the list.
+     * @param item Item to be added to the list.
+     */
+    public void addLast(T item) {
+        if (this.size == this.items.length) {
+            this.increaseSize(this.size * increaseFactor);
+        }
+
+        this.items[this.nextLast] = item;
+        this.nextLast = plusOne(this.nextLast);
+        this.size += 1;
+    }
+
+    /**
+     * Removes and returns the first item from the list.
+     */
+//    public T removeFirst() {
+//        if ()
+//    }
 
     /**
      * Returns the item at the specified index.
@@ -118,7 +148,7 @@ public class ArrayDeque<T> {
             return null;
         }
 
-        int firstIndex = this.plusOne(nextFirst);
+        int firstIndex = plusOne(nextFirst);
         int requiredIndex = firstIndex + index;
 
         if (requiredIndex < this.items.length) {
@@ -187,6 +217,22 @@ public class ArrayDeque<T> {
 
         for (int i = 0; i < 29; i++) {
             System.out.println(G.get(i) == i); // expected true
+        }
+
+        /* Testing the addLast method. */
+        System.out.println("addLast tests");
+        ArrayDeque<Integer> K = new ArrayDeque<>();
+
+        for (int i = 10; i > 0; i--) {
+            K.addFirst(i);
+        }
+
+        for (int i = 11; i <= 40; i++) {
+            K.addLast(i);
+        }
+
+        for (int i = 1; i < 40; i++) {
+            System.out.println(K.get(i - 1) == i);
         }
     }
 
