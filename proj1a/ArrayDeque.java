@@ -166,7 +166,7 @@ public class ArrayDeque<T> {
     }
 
     private void fixUsageRatio() {
-        double usageRatio = this.size / this.items.length;
+        double usageRatio = (double) this.size / this.items.length;
 
         if (usageRatio < usageFactor && this.items.length > 16) {
             this.decreaseSize(this.items.length / 2);
@@ -191,6 +191,25 @@ public class ArrayDeque<T> {
         this.nextFirst = firstIndex;
 
         return firstItem;
+    }
+
+    /**
+     * Removes and returns the last item from the list.
+     */
+    public T removeLast() {
+        if (this.size == 0) {
+            return null;
+        }
+
+        this.size -= 1;
+        this.fixUsageRatio();
+
+        int lastIndex = minusOne(this.nextLast);
+        T lastItem = this.items[lastIndex];
+        this.items[lastIndex] = null;
+        this.nextLast = lastIndex;
+
+        return lastItem;
     }
 
     /** Writing some temporary tests here. */
@@ -262,10 +281,32 @@ public class ArrayDeque<T> {
 
         /* Testing the removeFirst method. */
         System.out.println("removeFirst tests");
-
         ArrayDeque<Integer> D = new ArrayDeque<>();
         System.out.println(D.removeFirst() == null);
+        System.out.println(D.size() == 0);
+        D.addFirst(2);
+        System.out.println(D.removeFirst() == 2);
+        System.out.println(D.size() == 0);
+        D.addFirst(2);
+        D.removeFirst();
 
+        for (int i = 0; i < 100; i++) {
+            D.addFirst(1);
+            D.addLast(2);
+        }
+        D.printDeque(); // expected 100 1's followed by 100 2's.
+
+        for (int i = 0; i < 100; i++) {
+            D.removeFirst();
+        }
+        D.printDeque(); // expected 100 2's.
+
+        ArrayDeque<Integer> J = new ArrayDeque<>();
+        J.addLast(2);
+        System.out.println(J.removeFirst() == 2);
+        J.addFirst(2);
+        System.out.println(J.removeLast() == 2);
+        /* Testing the decreaseSize method. */
     }
 
     public static void main(String[] args) {
