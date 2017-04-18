@@ -212,21 +212,4 @@ public class ArrayDeque<Item> {
 
         return lastItem;
     }
-
-    public static void main(String[] args) {
-        ArrayDeque<Integer> A = new ArrayDeque<>();
-
-        for (int i = 100; i >= 0; i--) {
-            A.addFirst(i);
-        }
-
-        for (int i = 100; i >= 0 ; i--) {
-            System.out.println(A.removeFirst() != null);
-        }
-
-        for (int i = 100; i >= 0; i--) {
-            A.addFirst(i);
-        }
-
-    }
 }
