@@ -31,15 +31,6 @@ public class LinkedListDeque<Item> {
     private ItemNode sentinel;
     private int size;
 
-    /** Constructor to instantiate non-empty lists. */
-    public LinkedListDeque(Item item) {
-        this();
-        ItemNode nextNode = new ItemNode(item, this.sentinel, this.sentinel);
-        this.sentinel.next = nextNode;
-        this.sentinel.prev = nextNode;
-        this.size = 1;
-    }
-
     /** Constructor to instantiate empty lists. */
     public LinkedListDeque() {
         this.sentinel = new ItemNode(null, null, null);
