@@ -4,24 +4,26 @@
  */
 
 /* Invariants
-1. nextFirst is the position used when a new item
-   is added to the front of the list.
-2. nextLast is the position used when a new item
-   is added to the back of the list.
-3. plusOne(nextFirst) will always be the position
-   of the first item.
-4. minusOne(nextLast) will always be the position
-   of the last item.
-5. plusOne(nextLast) will be the new position of nextLast
-   when an item is added to the list.
-6. minusOne(nextFirst) will be the new position of nextFirst
-   when an item is added to the list.
-7. plusOne(nextFirst) will be the new position of nextFirst
-   one an item is removed from the list.
-8. minusOne(nextLast) will be the new position of nextLast
-   when an item is removed from the list.
-7. size should always represent the number of items
-   in the list.
+1.  For an empty list, the absolute difference b/w
+    nextFirst and nextLast should always be 1.
+2.  nextFirst is the position used when a new item
+    is added to the front of the list.
+3.  nextLast is the position used when a new item
+    is added to the back of the list.
+4.  plusOne(nextFirst) will always be the position
+    of the first item.
+5.  minusOne(nextLast) will always be the position
+    of the last item.
+6.  plusOne(nextLast) will be the new position of nextLast
+    when an item is added to the list.
+7.  minusOne(nextFirst) will be the new position of nextFirst
+    when an item is added to the list.
+8.  plusOne(nextFirst) will be the new position of nextFirst
+    one an item is removed from the list.
+9.  minusOne(nextLast) will be the new position of nextLast
+    when an item is removed from the list.
+10. size should always represent the number of items
+    in the list.
 */
 
 public class ArrayDeque<Item> {
@@ -159,10 +161,9 @@ public class ArrayDeque<Item> {
             newItems[i] = this.get(i);
         }
 
+        this.items = newItems;
         this.nextFirst = minusOne(0);
         this.nextLast = this.size;
-        this.items = newItems;
-
     }
 
     private void fixUsageRatio() {
@@ -177,7 +178,6 @@ public class ArrayDeque<Item> {
      * Removes and returns the first item from the list.
      */
     public Item removeFirst() {
-        /* Reducing size first for usageRatio calculations. */
         if (this.size == 0) {
             return null;
         }
