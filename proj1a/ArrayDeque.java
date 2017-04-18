@@ -182,13 +182,13 @@ public class ArrayDeque<Item> {
             return null;
         }
 
-        this.size -= 1;
-        this.fixUsageRatio();
-
         int firstIndex = plusOne(this.nextFirst);
         Item firstItem = this.items[firstIndex];
         this.items[firstIndex] = null;
         this.nextFirst = firstIndex;
+
+        this.size -= 1;
+        this.fixUsageRatio();
 
         return firstItem;
     }
@@ -201,14 +201,32 @@ public class ArrayDeque<Item> {
             return null;
         }
 
-        this.size -= 1;
-        this.fixUsageRatio();
-
         int lastIndex = minusOne(this.nextLast);
         Item lastItem = this.items[lastIndex];
         this.items[lastIndex] = null;
         this.nextLast = lastIndex;
 
+
+        this.size -= 1;
+        this.fixUsageRatio();
+
         return lastItem;
+    }
+
+    public static void main(String[] args) {
+        ArrayDeque<Integer> A = new ArrayDeque<>();
+
+        for (int i = 100; i >= 0; i--) {
+            A.addFirst(i);
+        }
+
+        for (int i = 100; i >= 0 ; i--) {
+            System.out.println(A.removeFirst() != null);
+        }
+
+        for (int i = 100; i >= 0; i--) {
+            A.addFirst(i);
+        }
+
     }
 }
