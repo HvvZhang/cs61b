@@ -11,17 +11,17 @@
    same underlying structure. An empty list must not be null.
 */
 
-public class LinkedListDeque<T> {
+public class LinkedListDeque<Item> {
 
     /**
      * Represents a naked DLList.
      */
     private class ItemNode {
         ItemNode prev;
-        T item;
+        Item item;
         ItemNode next;
 
-        public ItemNode(T item, ItemNode prev, ItemNode next) {
+        private ItemNode(Item item, ItemNode prev, ItemNode next) {
             this.prev = prev;
             this.item = item;
             this.next = next;
@@ -32,7 +32,7 @@ public class LinkedListDeque<T> {
     private int size;
 
     /** Constructor to instantiate non-empty lists. */
-    public LinkedListDeque(T item) {
+    public LinkedListDeque(Item item) {
         this();
         ItemNode nextNode = new ItemNode(item, this.sentinel, this.sentinel);
         this.sentinel.next = nextNode;
@@ -63,7 +63,7 @@ public class LinkedListDeque<T> {
      * Written iteratively.
      * @param index The position of the item in the list.
      */
-    public T get(int index) {
+    public Item get(int index) {
         ItemNode p = this.sentinel;
 
         if (index >= this.size || index < 0) {
@@ -82,7 +82,7 @@ public class LinkedListDeque<T> {
      * Written recursively.
      * @param index The position of the item in the list.
      */
-    private T getRecursive(ItemNode p, int index) {
+    private Item getRecursive(ItemNode p, int index) {
         if (index == 0) {
             return p.next.item;
         } else {
@@ -94,7 +94,7 @@ public class LinkedListDeque<T> {
      * Returns the i-th item in the list.
      * @param index The position of the item in the list.
      */
-    public T getRecursive(int index) {
+    public Item getRecursive(int index) {
         if (index >= this.size || index < 0) {
             return null;
         } else {
@@ -117,7 +117,7 @@ public class LinkedListDeque<T> {
      * Adds an item to the front of the list.
      * @param item The item to be added.
      */
-    public void addFirst(T item) {
+    public void addFirst(Item item) {
         ItemNode firstNode = new ItemNode(item, this.sentinel, this.sentinel.next);
         this.sentinel.next.prev = firstNode;
         this.sentinel.next = firstNode;
@@ -128,7 +128,7 @@ public class LinkedListDeque<T> {
      * Adds an item to the end of the list.
      * @param item The item to be added.
      */
-    public void addLast(T item) {
+    public void addLast(Item item) {
         ItemNode oldLastNode = this.sentinel.prev;
         ItemNode newLastNode = new ItemNode(item, oldLastNode, this.sentinel);
         oldLastNode.next = newLastNode;
@@ -147,7 +147,7 @@ public class LinkedListDeque<T> {
     /**
      * Removes and returns the first item from the list.
      */
-    public T removeFirst() {
+    public Item removeFirst() {
         ItemNode oldFirstNode = this.sentinel.next;
         ItemNode newFirstNode = oldFirstNode.next;
         newFirstNode.prev = this.sentinel;
@@ -160,7 +160,7 @@ public class LinkedListDeque<T> {
     /**
      * Removes and returns the last item from the list.
      */
-    public T removeLast() {
+    public Item removeLast() {
         ItemNode oldLastNode = this.sentinel.prev;
         ItemNode newLastNode = oldLastNode.prev;
         newLastNode.next = this.sentinel;
