@@ -91,10 +91,7 @@ public class ArrayDeque<Item> {
      * @param x The index one is being subtracted from.
      */
     private int minusOne(int x) {
-        if (x == 0) {
-            return this.items.length - 1;
-        }
-        return x - 1;
+        return (x - 1) % this.items.length;
     }
 
     /**
