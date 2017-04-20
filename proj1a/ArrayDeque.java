@@ -82,10 +82,7 @@ public class ArrayDeque<Item> {
      * @param x The index one is being added to.
      */
     private int plusOne(int x) {
-        if (x + 1 == this.items.length) {
-            return 0;
-        }
-        return x + 1;
+        return (x + 1) % this.items.length;
     }
 
     /**
