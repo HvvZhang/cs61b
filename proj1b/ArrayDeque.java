@@ -26,7 +26,7 @@
     in the list.
 */
 
-public class ArrayDeque<Item> {
+public class ArrayDeque<Item> implements Deque<Item> {
 
     private Item[] items;
     private int size;
@@ -44,11 +44,13 @@ public class ArrayDeque<Item> {
     }
 
     /** Returns true if the list is empty.*/
+    @Override
     public boolean isEmpty() {
         return this.size == 0;
     }
 
     /** Returns the size of the list. */
+    @Override
     public int size() {
         return this.size;
     }
@@ -57,6 +59,7 @@ public class ArrayDeque<Item> {
      * Returns the item at the specified index.
      * @param index The index of the i-th item.
      */
+    @Override
     public Item get(int index) {
         if (index >= this.size || index < 0) {
             return null;
@@ -69,6 +72,7 @@ public class ArrayDeque<Item> {
     }
 
     /** Prints out the items in the list. */
+    @Override
     public void printDeque() {
         for (int i = 0; i < this.size; i++) {
             System.out.print(this.get(i) + " ");
@@ -118,6 +122,7 @@ public class ArrayDeque<Item> {
      * Adds an item to the front of the list.
      * @param item Item to be added to the list.
      */
+    @Override
     public void addFirst(Item item) {
         if (this.size == this.items.length) {
             this.increaseSize(this.size * 2);
@@ -132,6 +137,7 @@ public class ArrayDeque<Item> {
      * Adds an item to the end of the list.
      * @param item Item to be added to the list.
      */
+    @Override
     public void addLast(Item item) {
         if (this.size == this.items.length) {
             this.increaseSize(this.size * 2);
@@ -169,6 +175,7 @@ public class ArrayDeque<Item> {
     /**
      * Removes and returns the first item from the list.
      */
+    @Override
     public Item removeFirst() {
         if (this.size == 0) {
             return null;
@@ -188,6 +195,7 @@ public class ArrayDeque<Item> {
     /**
      * Removes and returns the last item from the list.
      */
+    @Override
     public Item removeLast() {
         if (this.size == 0) {
             return null;
