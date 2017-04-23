@@ -22,7 +22,7 @@ public class TestArrayDeque1B {
         while (!fail) {
             double prob = StdRandom.uniform();
             boolean shouldBeEmpty = C.size() == 0;
-            Integer randomInt = (Integer) StdRandom.uniform(100000);
+            Integer randomInt = StdRandom.uniform(100000);
             Integer correct, incorrect;
             DequeOperation operation;
 
