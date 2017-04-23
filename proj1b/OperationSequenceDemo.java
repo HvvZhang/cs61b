@@ -5,6 +5,8 @@ public class OperationSequenceDemo {
         DequeOperation dequeOp1 = new DequeOperation("addFirst", 5);
         DequeOperation dequeOp2 = new DequeOperation("addFirst", 10);
         DequeOperation dequeOp3 = new DequeOperation("size");
+        fs.addOperation(dequeOp3);
+        dequeOp3 = new DequeOperation("removeLast");
 
         fs.addOperation(dequeOp1);
         fs.addOperation(dequeOp2);
