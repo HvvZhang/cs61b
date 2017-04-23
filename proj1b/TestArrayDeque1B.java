@@ -43,7 +43,7 @@ public class TestArrayDeque1B {
         while (!fail) {
             double prob = StdRandom.uniform();
             boolean shouldBeEmpty = C.size() == 0;
-            Integer randomInt = StdRandom.uniform(100000);
+            Integer randomInt = (Integer) StdRandom.uniform(100000);
             Integer correct, incorrect;
             DequeOperation oper;
 
@@ -65,7 +65,11 @@ public class TestArrayDeque1B {
                     correct = C.get(0);
                     incorrect = I.get(0);
                 } else {
-
+                    oper = new DequeOperation("addLast", randomInt);
+                    C.addLast(randomInt);
+                    I.addLast(randomInt);
+                    correct = C.get(C.size() - 1);
+                    incorrect = I.get(C.size() - 1);
                 }
             }
 
