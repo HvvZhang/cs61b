@@ -1,4 +1,5 @@
 /**
+ * Defines an unconventional equality for chars.
  * @author Arjun Nair
  */
 public class OffByOne implements CharacterComparator {

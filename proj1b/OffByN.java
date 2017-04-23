@@ -1,5 +1,6 @@
 /**
- * Created by arjunnair on 2017-04-23.
+ * Defines an unconventional equality for chars.
+ * @author Arjun Nair
  */
 public class OffByN implements CharacterComparator {
 

@@ -1,4 +1,5 @@
 /**
+ * Defines a basic equality for chars.
  * Created by arjunnair on 2017-04-23.
  */
 public class BasicCharEquality implements CharacterComparator {
