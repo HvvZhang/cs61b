@@ -45,27 +45,27 @@ public class TestArrayDeque1B {
             boolean shouldBeEmpty = C.size() == 0;
             Integer randomInt = (Integer) StdRandom.uniform(100000);
             Integer correct, incorrect;
-            DequeOperation oper;
+            DequeOperation operation;
 
             if (prob < 0.5 && !shouldBeEmpty) {
                 if (prob < 0.25) {
-                    oper = new DequeOperation("removeFirst");
+                    operation = new DequeOperation("removeFirst");
                     correct = C.removeFirst();
                     incorrect = I.removeFirst();
                 } else {
-                    oper = new DequeOperation("removeLast");
+                    operation = new DequeOperation("removeLast");
                     correct = C.removeLast();
                     incorrect = I.removeLast();
                 }
             } else {
                 if (prob < 0.75) {
-                    oper = new DequeOperation("addFirst", randomInt);
+                    operation = new DequeOperation("addFirst", randomInt);
                     C.addFirst(randomInt);
                     I.addFirst(randomInt);
                     correct = C.get(0);
                     incorrect = I.get(0);
                 } else {
-                    oper = new DequeOperation("addLast", randomInt);
+                    operation = new DequeOperation("addLast", randomInt);
                     C.addLast(randomInt);
                     I.addLast(randomInt);
                     correct = C.get(C.size() - 1);
@@ -73,7 +73,7 @@ public class TestArrayDeque1B {
                 }
             }
 
-            performed.addOperation(oper);
+            performed.addOperation(operation);
             fail = !correct.equals(incorrect);
             assertEquals(performed.toString(), correct, incorrect);
         }
