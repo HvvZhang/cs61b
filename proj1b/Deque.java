@@ -1,6 +1,7 @@
 /**
  * A blueprint of what ANY Deque should behave like.
  */
+
 public interface Deque<Item> {
 
     /** Returns true if the list is empty.*/
