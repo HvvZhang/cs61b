@@ -7,28 +7,6 @@ import org.junit.Test;
  */
 
 public class TestArrayDeque1B {
-//
-//    /**
-//     * Adds an Integer to either the beginning or
-//     * the ends of two ALists.
-//     * @param C     The ArrayList with the correct implementation.
-//     * @param I     The ArrayList with the incorrect implementation.
-//     * @param first Determines where the Integer should be added.
-//     */
-//    public static void add(ArrayDequeSolution<Integer> C, StudentArrayDeque<Integer> I,
-//                           boolean first, DequeOperation oper) {
-//        Integer randomInt = StdRandom.uniform(100000);
-//
-//        if (first) {
-//            C.addFirst(randomInt);
-//            I.addFirst(randomInt);
-//
-//        } else {
-//            C.addLast(randomInt);
-//            I.addLast(randomInt);
-//        }
-//    }
-
     @Test
     public void randomTest() {
         /* Instantiating the arrays to be tested.*/
