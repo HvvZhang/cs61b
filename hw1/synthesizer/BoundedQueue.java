@@ -19,7 +19,7 @@ public interface BoundedQueue<T> {
     void enqueue(T x);
 
     /** Removes an item from the front of the queue. */
-    T deque();
+    T dequeue();
 
     /**
      * Returns the item at the front of the queue.
