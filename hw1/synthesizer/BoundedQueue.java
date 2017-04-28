@@ -4,7 +4,7 @@ package synthesizer;
  * An interface for a limited capacity queue.
  * @author Arjun Nair
  */
-public interface BoundedQueue<T> {
+public interface BoundedQueue<T> extends Iterable<T> {
 
     /** Returns the maximum capacity of the queue. */
     int capacity();
