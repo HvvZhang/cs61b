@@ -1,7 +1,5 @@
 package synthesizer;
 
-import edu.princeton.cs.algs4.StdAudio;
-
 /** Represents a guitar string. */
 public class GuitarString {
     private static final int SR = 44100;      // Sampling Rate
