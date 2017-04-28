@@ -1,5 +1,7 @@
 package synthesizer;
 
+import edu.princeton.cs.algs4.StdAudio;
+
 /** Represents a guitar string. */
 public class GuitarString {
     private static final int SR = 44100;      // Sampling Rate
@@ -21,25 +23,28 @@ public class GuitarString {
 
     /** Pluck the guitar string by replacing the buffer with white noise. */
     public void pluck() {
-        // TODO: Dequeue everything in the buffer, and replace it with random numbers
-        //       between -0.5 and 0.5. You can get such a number by using:
-        //       double r = Math.random() - 0.5;
-        //
-        //       Make sure that your random numbers are different from each other.
+        for (int i = 0; i < this.buffer.capacity(); i++) {
+            this.buffer.dequeue();
+
+            double random = Math.random() - 0.5;
+            this.buffer.enqueue(random);
+        }
     }
 
     /** Advance the simulation one time step by performing one iteration of
      * the Karplus-Strong algorithm. 
      */
     public void tic() {
-        // TODO: Dequeue the front sample and enqueue a new sample that is
-        //       the average of the two multiplied by the DECAY factor.
-        //       Do not call StdAudio.play().
+        double first = this.buffer.dequeue();
+        double second = this.buffer.peek();
+
+        double average = (first + second) / 2;
+        double averageDecayed = average * DECAY;
+        this.buffer.enqueue(averageDecayed);
     }
 
-    /* Return the double at the front of the buffer. */
+    /** Return the double at the front of the buffer. */
     public double sample() {
-        // TODO: Return the correct thing.
-        return 0;
+        return this.buffer.peek();
     }
 }
