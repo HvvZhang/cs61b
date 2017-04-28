@@ -46,6 +46,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * throw new RuntimeException("Ring buffer overflow"). Exceptions
      * covered Monday.
      */
+    @Override
     public void enqueue(T x) {
         this.rb[this.last] = x;
         this.last = plusOne(this.last);
@@ -57,6 +58,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
      * throw new RuntimeException("Ring buffer underflow"). Exceptions
      * covered Monday.
      */
+    @Override
     public T dequeue() {
         T firstItem = this.rb[this.first];
         this.rb[this.first] = null;
@@ -69,6 +71,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     /**
      * Return oldest item, but doesn't remove it.
      */
+    @Override
     public T peek() {
         return this.rb[this.first];
     }
