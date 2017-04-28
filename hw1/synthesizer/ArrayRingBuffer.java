@@ -1,6 +1,5 @@
 package synthesizer;
 
-import synthesizer.AbstractBoundedQueue;
 import java.util.Iterator;
 
 /* Invariants
@@ -34,7 +33,7 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     }
 
     /**
-     * Makes sure that last is always within the array index.
+     * Makes sure that last is always within the range of array indices.
      * @param index The index 1 is being added to.
      */
     protected int plusOne(int index) {
