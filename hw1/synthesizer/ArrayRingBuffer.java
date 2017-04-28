@@ -83,6 +83,10 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
         return this.rb[this.first];
     }
 
+    /**
+     * Returns an Iterator.
+     */
+    @Override
     public Iterator<T> iterator() {
         return new BufferIterator();
     }
@@ -90,10 +94,12 @@ public class ArrayRingBuffer<T> extends AbstractBoundedQueue<T> {
     private class BufferIterator implements Iterator<T> {
         int position = 0;
 
+        @Override
         public boolean hasNext() {
             return this.position < fillCount;
         }
 
+        @Override
         public T next() {
             int nextItemIndex = (this.position + first) % capacity;
             T nextItem = rb[nextItemIndex];
