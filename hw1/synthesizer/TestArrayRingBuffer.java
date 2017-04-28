@@ -7,12 +7,6 @@ import static org.junit.Assert.*;
  */
 
 public class TestArrayRingBuffer {
-    @Test
-    public void testPlusOne() {
-        ArrayRingBuffer<Integer> arb = new ArrayRingBuffer<>(10);
-        int nextLast = arb.plusOne(9);
-        assertEquals(0, nextLast);
-    }
 
     @Test
     public void testBasicEnqueue() {
